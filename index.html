@@ -1413,8 +1413,8 @@ class Component extends DCLogic {
     this._supaPaintPanels();
     this._supaPaintDetail();
     requestAnimationFrame(() => this._supaPaintDetail());
-    if (ps && ps.openStop !== this.state.openStop) this._loadDetVid();
-    { const dv = document.getElementById('dt-det-vid'); const want = this.state.detVid || ''; if (dv && want && dv.getAttribute('src') !== want) { this._prepVideo(dv, true); dv.setAttribute('src', want); dv.play().catch(() => {}); } }
+    if (this._detOpenSeen !== this.state.openStop) { this._detOpenSeen = this.state.openStop; this._loadDetVid(); }
+    { const dv = document.getElementById('dt-det-vid'); const want = this.state.detVid || ''; if (dv && want && dv.getAttribute('src') !== want) { dv.controls = true; this._prepVideo(dv, true); dv.setAttribute('src', want); dv.play().catch(() => {}); } }
     if (ps && ps.openStop !== this.state.openStop && this.state.openStop !== null) {
       setTimeout(() => this._restoreSlots('gallery'), 30);
       setTimeout(() => this._captureSlots(), 2500);
@@ -2181,6 +2181,13 @@ class Component extends DCLogic {
   async _loadDetVid() {
     const i = this.state.openStop;
     if (i === null) { if (this.state.detVid) this.setState({ detVid: null, detLocal: false }); return; }
+    /* stop-ийн дэлгэрэнгүй цонхны статик бичлэг (repo доторх /videos): 0-based stop индекс */
+    const STATIC_DET = { 2: './videos/khar-zurkhnii-swans.mp4' };
+    if (STATIC_DET[i]) {
+      if (this.state.detVid !== STATIC_DET[i] || this.state.detLocal) this.setState({ detVid: STATIC_DET[i], detLocal: false });
+      [60, 250, 700].forEach(ms => setTimeout(() => { const c = document.getElementById('dt-carousel'); if (c && this.state.openStop === i && c.scrollLeft > 0 && !c.dataset.userMoved) { c.style.scrollBehavior = 'auto'; c.scrollLeft = 0; } }, ms));
+      return;
+    }
     const remote = this._supaDet && this._supaDet[i];
     let url = null, local = false;
     try {
