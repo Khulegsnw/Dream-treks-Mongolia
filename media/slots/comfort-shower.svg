@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Hot shower">
+  <rect width="640" height="480" fill="#f6f3ed"/>
+  <circle cx="320" cy="240" r="150" fill="#ffffff"/>
+  <g fill="none" stroke="#1a63d8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M250 150 V118 a30 30 0 0 1 30 -30 H372"/>
+    <path d="M372 88 a42 42 0 0 1 42 42 H330 a42 42 0 0 1 42 -42z" fill="#e8f0fd"/>
+    <path d="M326 142 h92"/>
+  </g>
+  <g stroke="#ffaf1d" stroke-width="7" stroke-linecap="round">
+    <path d="M338 172 v30"/><path d="M356 176 v46"/><path d="M374 172 v30"/><path d="M392 176 v46"/><path d="M410 172 v30"/>
+    <path d="M347 238 v28"/><path d="M365 246 v40"/><path d="M383 238 v28"/><path d="M401 246 v40"/>
+    <path d="M356 306 v22"/><path d="M374 312 v30"/><path d="M392 306 v22"/>
+  </g>
+  <g fill="none" stroke="#8a5c00" stroke-width="5" stroke-linecap="round" opacity=".55">
+    <path d="M232 214 c10 -14 -10 -22 0 -36"/><path d="M252 226 c10 -14 -10 -22 0 -36"/><path d="M212 226 c10 -14 -10 -22 0 -36"/>
+  </g>
+  <path d="M0 400 H640 V480 H0z" fill="#efe9dc"/>
+</svg>

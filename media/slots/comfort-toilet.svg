@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Private toilet">
+  <rect width="640" height="480" fill="#f6f3ed"/>
+  <circle cx="320" cy="240" r="150" fill="#ffffff"/>
+  <g fill="none" stroke="#1a63d8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="262" y="120" width="116" height="78" rx="10" fill="#e8f0fd"/>
+    <path d="M320 120 v-14"/><circle cx="320" cy="98" r="9"/>
+    <path d="M246 214 h148 c0 52 -26 92 -74 98 c-48 -6 -74 -46 -74 -98z" fill="#e8f0fd"/>
+    <path d="M290 312 v22 h60 v-22"/>
+    <path d="M262 214 q58 18 116 0"/>
+  </g>
+  <g stroke="#ffaf1d" stroke-width="7" stroke-linecap="round" fill="none">
+    <rect x="436" y="190" width="44" height="44" rx="8" fill="#fff4dc"/><circle cx="458" cy="212" r="9"/>
+    <path d="M444 234 v28 h24"/>
+  </g>
+  <path d="M0 400 H640 V480 H0z" fill="#efe9dc"/>
+</svg>
