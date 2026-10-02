@@ -2184,7 +2184,7 @@ class Component extends DCLogic {
     const i = this.state.openStop;
     if (i === null) { if (this.state.detVid || this.state.detYt) this.setState({ detVid: null, detYt: null, detLocal: false }); return; }
     /* stop-ийн дэлгэрэнгүй цонхны статик бичлэг (repo доторх /videos): 0-based stop индекс */
-    const STATIC_DET = { 1: 'yt:uAT8d1orQb4', 2: 'yt:BX6ZQVDYs9s' };
+    const STATIC_DET = { 1: 'yt:uAT8d1orQb4', 2: 'yt:BX6ZQVDYs9s', 3: 'yt:GHxF7QwXAzU' };
     if (STATIC_DET[i]) {
       const sv = STATIC_DET[i], yt = /^yt:/.test(sv) ? sv.slice(3) : null;
       if (this.state.detVid !== (yt ? null : sv) || this.state.detYt !== yt || this.state.detLocal) this.setState({ detVid: yt ? null : sv, detYt: yt, detLocal: false });
