@@ -530,6 +530,11 @@
       this._frame = root.querySelector('.frame');
       this._ring = root.querySelector('.ring');
       this._img = root.querySelector('.frame img');
+      // Performance: photos load lazily (hidden template copies, off-screen sections,
+      // carousel slides and journey panels never hit the network until they are about
+      // to be seen). The host page calls loadNow() to pre-warm neighbours.
+      this._img.loading = 'lazy';
+      this._img.decoding = 'async';
       this._empty = root.querySelector('.empty');
       this._cap = root.querySelector('.cap');
       this._sub = root.querySelector('.sub');
@@ -541,6 +546,8 @@
       this._credit.addEventListener('click', (e) => e.stopPropagation());
       this._credit.addEventListener('dblclick', (e) => e.stopPropagation());
       this._ghost = root.querySelector('.ghost');
+      this._ghost.loading = 'lazy';
+      this._ghost.decoding = 'async';
       this._err = null;
       this._input = root.querySelector('input');
       this._depth = 0;
@@ -702,6 +709,19 @@
       }, { passive: false });
     }
 
+    /** Start fetching the photo right away (used to pre-warm the next carousel
+     *  slides / journey panels, which native lazy loading would fetch too late
+     *  because they sit inside horizontal scrollers). */
+    loadNow(priority) {
+      this._allowLoad = true;
+      // 'high' for the photo being looked at, 'low' for neighbours pre-warmed in the background
+      if (priority && this._img && !this._img.getAttribute('src')) this._img.fetchPriority = priority;
+      if (this._img && this._img.loading !== 'eager') this._img.loading = 'eager';
+      if (this.isConnected) this._render();
+    }
+    /** The photo this slot shows (or will show once it is allowed to load). */
+    get photoUrl() { return this._url || ''; }
+
     connectedCallback() {
       // Warn once per page — an id-less slot works for the session but
       // cannot persist, and two id-less slots would share nothing.
@@ -727,9 +747,16 @@
       this._ro.observe(this);
       load();
       this._render();
+      if (this.hasAttribute('data-defer') && !this._allowLoad && 'IntersectionObserver' in window) {
+        this._io = new IntersectionObserver((es) => {
+          if (es.some((e) => e.isIntersecting)) { this._io.disconnect(); this._io = null; this.loadNow(); }
+        });
+        this._io.observe(this);
+      }
     }
 
     disconnectedCallback() {
+      if (this._io) { this._io.disconnect(); this._io = null; }
       subs.delete(this._subFn);
       this.removeEventListener('pointerenter', this._subFn);
       this.removeEventListener('dragenter', this);
@@ -1098,6 +1125,7 @@
       const srcAttr = this.getAttribute('src') || '';
       this._userUrl = (stored && stored.u) || null;
       const url = this._userUrl || srcAttr;
+      this._url = url || '';
       // Don't clobber an in-flight reframe with a store-triggered re-render.
       if (!this.hasAttribute('data-reframe')) {
         this._view = {
@@ -1137,9 +1165,20 @@
           // update-the-image-data microtask runs, so same-task re-renders
           // (the pick path's credit/credit-href setAttributes) need this
           // flag, not complete, to know a load is in flight.
-          this._loadPending = true;
-          this._img.src = url;
-          this._ghost.src = url;
+          // data-defer: the photo is fetched only once loadNow() is called (page pre-warms the
+          // slides/panels about to be seen) or the slot becomes visible by itself (IO fallback).
+          const deferred = this.hasAttribute('data-defer') && !this._allowLoad && !/^(data|blob):/i.test(url);
+          if (!this.isConnected || deferred) {
+            // Native lazy loading only works for attached images (a detached <img> fetches at
+            // once, which is what made every gallery photo download at page load). The
+            // connectedCallback render assigns the src right after insertion.
+            this._loadPending = false;
+          } else {
+            this._loadPending = true;
+            if (this.hasAttribute('data-eager') || this._allowLoad) this._img.loading = 'eager';
+            this._img.src = url;
+            this._ghost.src = url;
+          }
         } else {
           // Same-src re-render — release if settled, so an ingest-set
           // spinner can't stick after a byte-identical re-upload (same

@@ -3,19 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<link rel="preload" href="/vendor/react.production.min.js" as="script" crossorigin="anonymous">
+<link rel="preload" href="/vendor/react-dom.production.min.js" as="script" crossorigin="anonymous">
+<link rel="preload" href="/images/hero-poster.jpg" as="image" fetchpriority="low">
+<link rel="preconnect" href="https://www.youtube.com">
+<link rel="preload" href="/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* fonts are served from this site (same Google Fonts files, latin subset): no third-party CSS/DNS/TLS round trips */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/archivo.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:300 400;font-display:swap;src:url(/fonts/cormorant-garamond-italic.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:300 600;font-display:swap;src:url(/fonts/cormorant-garamond.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url(/fonts/poppins-300.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/poppins-400.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/poppins-500.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/poppins-600.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+</style>
+<script src="./support.js?v=2"></script>
 <title>Dream Treks — Mongolia Horseback Expedition</title>
 <meta property="og:image" content="/images/og.png">
 </head>
 <body>
+<!-- instant splash: painted by the browser right away (before the JS app renders), swapped for the live one -->
+<div id="dt-pre" aria-hidden="true" style="position:fixed;inset:0;z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;background:#0e0c09;color:#ffffff">
+  <div style="position:relative;width:min(320px,62vw);aspect-ratio:703.21/304.21">
+    <svg viewBox="0 0 703.21 304.21" style="position:absolute;inset:0;width:100%;height:100%;color:rgba(255,255,255,.16)"><use href="#dt-logo"></use></svg>
+    <svg viewBox="0 0 703.21 304.21" style="position:absolute;inset:0;width:100%;height:100%;color:#ffffff;animation:dt-ld-fill 1s cubic-bezier(.6,0,.3,1) infinite"><use href="#dt-logo"></use></svg>
+  </div>
+  <div style="width:min(160px,40vw);height:2px;background:rgba(255,255,255,.14);overflow:hidden;border-radius:2px"><div style="width:100%;height:100%;background:#ffaf1d;transform-origin:left;animation:dt-ld-bar 1s cubic-bezier(.6,0,.3,1) infinite"></div></div>
+</div>
 <x-dc>
 <helmet>
 <link rel="icon" type="image/svg+xml" href="/images/logo-favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;family=Poppins:wght@300;400;500;600&amp;display=swap">
-<script src="./image-slot.js"></script>
+<script src="./image-slot.js?v=2"></script>
 <style>
 html{scroll-behavior:smooth}
 body{margin:0;background:#ffffff;color:#1b1610;font-family:Archivo,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -90,7 +111,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
 </style>
 <template id="__bundler_thumbnail"><svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="240" fill="#3181fa"></rect><g transform="translate(72,84)"><path d="M0 48 C 18 12, 40 12, 58 34 S 80 56, 96 24" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-dasharray="4 12"></path><circle cx="0" cy="48" r="10" fill="#ffaf1d"></circle><circle cx="96" cy="24" r="10" fill="#ffffff"></circle></g><text x="120" y="196" text-anchor="middle" fill="#ffffff" font-family="Archivo,sans-serif" font-size="22" font-weight="700" letter-spacing="4">DT</text></svg></template>
 <style>@keyframes dt-ld-fill{0%{clip-path:inset(0 100% 0 0)}70%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 0)}}@keyframes dt-ld-bar{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}</style>
-<script>(function(){var t0=Date.now();function hide(){var el=document.getElementById('dt-loader');if(!el)return;var w=Math.max(0,900-(Date.now()-t0));setTimeout(function(){el.style.opacity='0';el.style.visibility='hidden';setTimeout(function(){el.remove&&el.remove();},900);},w);}if(document.readyState==='complete')hide();else window.addEventListener('load',hide);setTimeout(hide,1800);})();</script>
+<script>(function(){var t0=Date.now(),ready=false,done=false;function hide(){var el=document.getElementById('dt-loader');if(!el)return;var w=Math.max(0,900-(Date.now()-t0));setTimeout(function(){var p=document.getElementById('dt-pre');if(p)p.remove();el.style.opacity='0';el.style.visibility='hidden';setTimeout(function(){el.remove&&el.remove();},900);},w);}/* hide the splash as soon as the hero photo is in (not when every last image/film has loaded); 1.8s at most, as before */var im=new Image();im.onload=im.onerror=function(){ready=true;};im.src='/images/hero-poster.jpg';(function poll(){var pre=document.getElementById('dt-pre'),el=document.getElementById('dt-loader');if(pre&&el&&el.getClientRects().length)pre.remove();if(done)return;if(ready&&el&&el.getClientRects().length){done=true;hide();return;}if(Date.now()-t0<1800)setTimeout(poll,60);else{done=true;hide();}})();if(document.readyState==='complete')hide();else window.addEventListener('load',hide);setTimeout(hide,1800);setTimeout(function(){var pre=document.getElementById('dt-pre');if(pre)pre.remove();},6000);})();</script>
 </helmet>
 <div id="dt-loader" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;background:#0e0c09;color:#ffffff;transition:opacity .8s ease,visibility .8s ease">
   <div style="position:relative;width:min(320px,62vw);aspect-ratio:703.21/304.21">
@@ -128,8 +149,8 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
 
 <header id="top" data-screen-label="Hero" style="position:relative;height:100vh;min-height:560px;overflow:hidden">
   <div id="dt-hero-media" style="position:absolute;inset:-4%;animation:dt-kenburns 44s ease-in-out infinite alternate;will-change:transform">
-    <div id="dt-hero-poster" style="position:absolute;inset:0;background-color:#1a1a1a;background-image:url('https://img.youtube.com/vi/maX2DMex6aU/maxresdefault.jpg'),url('https://img.youtube.com/vi/maX2DMex6aU/hqdefault.jpg');background-size:cover;background-position:center;background-repeat:no-repeat"></div>
-    <div id="dt-hero-yt" style="position:absolute;inset:0;overflow:hidden;pointer-events:none"><iframe src="https://www.youtube.com/embed/maX2DMex6aU?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=maX2DMex6aU&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;showinfo=0&amp;iv_load_policy=3&amp;disablekb=1&amp;fs=0&amp;enablejsapi=1" title="Baldan bereeven Monastery" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true" style="position:absolute;top:50%;left:50%;width:max(108vw,192vh);height:max(60.75vw,108vh);transform:translate(-50%,-50%) scale(1.12);border:0;pointer-events:none;opacity:0;transition:opacity 1s ease"></iframe></div>
+    <div id="dt-hero-poster" style="position:absolute;inset:0;background-color:#1a1a1a;background-image:url('/images/hero-poster.jpg');background-size:cover;background-position:center;background-repeat:no-repeat"></div>
+    <div id="dt-hero-yt" style="position:absolute;inset:0;overflow:hidden;pointer-events:none"><iframe data-src="https://www.youtube.com/embed/maX2DMex6aU?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=maX2DMex6aU&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;showinfo=0&amp;iv_load_policy=3&amp;disablekb=1&amp;fs=0&amp;enablejsapi=1" title="Baldan bereeven Monastery" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true" style="position:absolute;top:50%;left:50%;width:max(108vw,192vh);height:max(60.75vw,108vh);transform:translate(-50%,-50%) scale(1.12);border:0;pointer-events:none;opacity:0;transition:opacity 1s ease"></iframe></div>
   </div>
   <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(14,12,9,.44) 0%,rgba(14,12,9,.2) 40%,rgba(14,12,9,.17) 62%,rgba(14,12,9,.34) 88%,rgba(255,255,255,.35) 100%)"></div>
   <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 50% 46%,rgba(14,12,9,.26) 0%,rgba(14,12,9,0) 100%)"></div>
@@ -210,7 +231,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
     <div id="dt-htrack" style="position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth">
       <section data-panel="0" data-screen-label="01 Ulaanbaatar" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-0" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot id="pan-bg-0" src="./media/panels/01.webp" data-panbg="0" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 01 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-0" src="./media/panels/01.webp" data-panbg="0" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 01 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-0" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -239,7 +260,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       </section>
       <section data-panel="1" data-screen-label="02 Chinggis Khaan Statue" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-1" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot id="pan-bg-1" src="./media/panels/02.webp" data-panbg="1" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 02 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-1" src="./media/panels/02.webp" data-panbg="1" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 02 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-1" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -268,7 +289,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       </section>
       <section data-panel="2" data-screen-label="03 Khar Zurkhnii Khokh Lake" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-2" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot id="pan-bg-2" src="./media/panels/03.webp" data-panbg="2" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 03 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-2" src="./media/panels/03.webp" data-panbg="2" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 03 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-2" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -297,7 +318,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       </section>
       <section data-panel="3" data-screen-label="04 The Hearth of Chinggis Khan" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-3" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot id="pan-bg-3" src="./media/panels/04.webp" data-panbg="3" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 04 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-3" src="./media/panels/04.webp" data-panbg="3" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 04 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-3" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -326,7 +347,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       </section>
       <section data-panel="4" data-screen-label="05 Khangal Lake" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-4" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot id="pan-bg-4" src="./media/panels/05.webp" data-panbg="4" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 05 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-4" src="./media/panels/05.webp" data-panbg="4" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 05 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-4" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -355,7 +376,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       </section>
       <section data-panel="5" data-screen-label="06 Baldan Bereeven Monastery" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-5" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot id="pan-bg-5" src="./media/panels/06.webp" data-panbg="5" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 06 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-5" src="./media/panels/06.webp" data-panbg="5" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 06 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-5" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -384,7 +405,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       </section>
       <section data-panel="6" data-screen-label="07 13th Century Complex" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-6" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot id="pan-bg-6" src="./media/panels/07.webp" data-panbg="6" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 07 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-6" src="./media/panels/07.webp" data-panbg="6" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 07 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-6" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -413,7 +434,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       </section>
       <section data-panel="7" data-screen-label="08 Hustai National Park" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-7" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot id="pan-bg-7" src="./media/panels/08.webp" data-panbg="7" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 08 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-7" src="./media/panels/08.webp" data-panbg="7" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 08 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-7" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -443,7 +464,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       </section>
       <section data-panel="8" data-screen-label="09 Other Gallery" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-8" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot id="pan-bg-8" src="./media/panels/09.webp" data-panbg="8" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 09 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-8" src="./media/panels/09.webp" data-panbg="8" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 09 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-8" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -769,7 +790,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
 <section data-screen-label="Final CTA" style="position:relative;height:100vh;min-height:620px">
   <div style="position:absolute;inset:0;overflow:hidden">
     <image-slot id="cta-landscape" src="./media/slots/cta-landscape.webp" shape="rect" placeholder="Enormous Mongolian landscape — riders small in the frame"></image-slot>
-    <div id="dt-cta-yt" style="position:absolute;inset:0;overflow:hidden;pointer-events:none"><iframe src="https://www.youtube.com/embed/-7-aaou3BAg?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=-7-aaou3BAg&amp;cc_load_policy=0&amp;iv_load_policy=3&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;showinfo=0" title="Horse show 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true" style="position:absolute;top:50%;left:50%;width:100vw;height:56.25vw;min-height:100%;min-width:177.78vh;transform:translate(-50%,-50%);border:0;pointer-events:none"></iframe></div>
+    <div id="dt-cta-yt" style="position:absolute;inset:0;overflow:hidden;pointer-events:none"><iframe data-src="https://www.youtube.com/embed/-7-aaou3BAg?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=-7-aaou3BAg&amp;cc_load_policy=0&amp;iv_load_policy=3&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;showinfo=0&amp;enablejsapi=1" title="Horse show 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true" style="position:absolute;top:50%;left:50%;width:100vw;height:56.25vw;min-height:100%;min-width:177.78vh;transform:translate(-50%,-50%);border:0;pointer-events:none"></iframe></div>
   </div>
   <button type="button" data-ctasound="1" style="position:absolute;right:4vw;bottom:80px;z-index:6;cursor:pointer;padding:9px 14px;border:1px solid rgba(255,255,255,.4);border-radius:10px;background:rgba(14,12,9,.42);backdrop-filter:blur(10px);font:600 9px Archivo,sans-serif;letter-spacing:.22em;color:rgba(255,255,255,.9);transition:background .3s ease" style-hover="background:rgba(14,12,9,.72);color:#ffffff">SOUND OFF</button>
   <button type="button" data-tool="" data-vidpick="cta" style="position:absolute;right:4vw;bottom:34px;z-index:6;cursor:pointer;padding:9px 14px;border:1px solid rgba(255,255,255,.4);border-radius:10px;background:rgba(14,12,9,.42);backdrop-filter:blur(10px);font:600 9px Archivo,sans-serif;letter-spacing:.22em;color:rgba(255,255,255,.9);transition:background .3s ease" style-hover="background:rgba(14,12,9,.72);color:#ffffff">UPLOAD FILM · LOCAL</button>
@@ -994,123 +1015,123 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
         <sc-if value="{{ hasDetYt }}" hint-placeholder-val="{{ false }}"><div style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center;position:relative;background:#0e0c09"><iframe id="dt-det-yt" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe></div></sc-if>
         <sc-if value="{{ hasDetVid }}" hint-placeholder-val="{{ false }}"><div style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center;position:relative;background:#0e0c09"><video id="dt-det-vid" controls="" playsInline="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></div></sc-if>
         <sc-if value="{{ open0 }}" hint-placeholder-val="{{ false }}">
-          <image-slot id="st0u-2" src="./media/orig/ub-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Chinggis Khaan statue"></image-slot>
-          <image-slot id="st0u-3" src="./media/orig/ub-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Government Palace"></image-slot>
-          <image-slot id="st0u-4" src="./media/orig/ub-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Sükhbaatar statue"></image-slot>
-          <image-slot id="st0u-6" src="./media/orig/ub-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Zaisan Memorial"></image-slot>
-          <image-slot id="st0u-7" src="./media/orig/ub-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Zaisan Memorial view"></image-slot>
-          <image-slot id="st0u-8" src="./media/orig/ub-8s.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Children's Park"></image-slot>
-          <image-slot id="st0u-9" src="./media/orig/ub-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Children's Park"></image-slot>
-          <image-slot id="st0u-11" src="./media/orig/ub-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Naadam at Central Stadium"></image-slot>
+          <image-slot data-defer id="st0u-2" src="./media/orig/ub-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Chinggis Khaan statue"></image-slot>
+          <image-slot data-defer id="st0u-3" src="./media/orig/ub-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Government Palace"></image-slot>
+          <image-slot data-defer id="st0u-4" src="./media/orig/ub-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Sükhbaatar statue"></image-slot>
+          <image-slot data-defer id="st0u-6" src="./media/orig/ub-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Zaisan Memorial"></image-slot>
+          <image-slot data-defer id="st0u-7" src="./media/orig/ub-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Zaisan Memorial view"></image-slot>
+          <image-slot data-defer id="st0u-8" src="./media/orig/ub-8s.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Children's Park"></image-slot>
+          <image-slot data-defer id="st0u-9" src="./media/orig/ub-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Children's Park"></image-slot>
+          <image-slot data-defer id="st0u-11" src="./media/orig/ub-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Naadam at Central Stadium"></image-slot>
         </sc-if>
         <sc-if value="{{ open1 }}" hint-placeholder-val="{{ false }}">
-          <image-slot id="st1-1" src="./media/orig/02-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 1"></image-slot>
-          <image-slot id="st1-2" src="./media/orig/02-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 2"></image-slot>
-          <image-slot id="st1-3" src="./media/orig/02-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 3"></image-slot>
-          <image-slot id="st1-4" src="./media/orig/02-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 4"></image-slot>
-          <image-slot id="st1-5" src="./media/orig/02-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 5"></image-slot>
-          <image-slot id="st1-6" src="./media/orig/02-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 6"></image-slot>
-          <image-slot id="st1-7" src="./media/orig/02-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 7"></image-slot>
-          <image-slot id="st1-8" src="./media/orig/02-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 8"></image-slot>
-          <image-slot id="st1-9" src="./media/orig/02-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 9"></image-slot>
-          <image-slot id="st1-10" src="./media/orig/02-10.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 10"></image-slot>
-          <image-slot id="st1-11" src="./media/orig/02-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 11"></image-slot>
-          <image-slot id="st1-12" src="./media/orig/02-12.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 12"></image-slot>
-          <image-slot id="st1-13" src="./media/orig/02-13.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 13"></image-slot>
-          <image-slot id="st1-14" src="./media/orig/02-14.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 14"></image-slot>
-          <image-slot id="st1-15" src="./media/orig/02-15.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 15"></image-slot>
+          <image-slot data-defer id="st1-1" src="./media/orig/02-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 1"></image-slot>
+          <image-slot data-defer id="st1-2" src="./media/orig/02-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 2"></image-slot>
+          <image-slot data-defer id="st1-3" src="./media/orig/02-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 3"></image-slot>
+          <image-slot data-defer id="st1-4" src="./media/orig/02-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 4"></image-slot>
+          <image-slot data-defer id="st1-5" src="./media/orig/02-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 5"></image-slot>
+          <image-slot data-defer id="st1-6" src="./media/orig/02-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 6"></image-slot>
+          <image-slot data-defer id="st1-7" src="./media/orig/02-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 7"></image-slot>
+          <image-slot data-defer id="st1-8" src="./media/orig/02-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 8"></image-slot>
+          <image-slot data-defer id="st1-9" src="./media/orig/02-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 9"></image-slot>
+          <image-slot data-defer id="st1-10" src="./media/orig/02-10.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 10"></image-slot>
+          <image-slot data-defer id="st1-11" src="./media/orig/02-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 11"></image-slot>
+          <image-slot data-defer id="st1-12" src="./media/orig/02-12.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 12"></image-slot>
+          <image-slot data-defer id="st1-13" src="./media/orig/02-13.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 13"></image-slot>
+          <image-slot data-defer id="st1-14" src="./media/orig/02-14.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 14"></image-slot>
+          <image-slot data-defer id="st1-15" src="./media/orig/02-15.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Chinggis Khan Equestrian Statue — photo 15"></image-slot>
         </sc-if>
         <sc-if value="{{ open2 }}" hint-placeholder-val="{{ false }}">
-          <image-slot id="st2-1" src="./media/orig/03-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 1"></image-slot>
-          <image-slot id="st2-2" src="./media/orig/03-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 2"></image-slot>
-          <image-slot id="st2-3" src="./media/orig/03-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 3"></image-slot>
-          <image-slot id="st2-4" src="./media/orig/03-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 4"></image-slot>
-          <image-slot id="st2-5" src="./media/orig/03-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 5"></image-slot>
-          <image-slot id="st2-6" src="./media/orig/03-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 6"></image-slot>
-          <image-slot id="st2-7" src="./media/orig/03-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 7"></image-slot>
-          <image-slot id="st2-8" src="./media/orig/03-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 8"></image-slot>
-          <image-slot id="st2-9" src="./media/orig/03-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 9"></image-slot>
-          <image-slot id="st2-10" src="./media/orig/03-10.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 10"></image-slot>
-          <image-slot id="st2-11" src="./media/orig/03-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 11"></image-slot>
-          <image-slot id="st2-12" src="./media/orig/03-12.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 12"></image-slot>
-          <image-slot id="st2-13" src="./media/orig/03-13.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 13"></image-slot>
-          <image-slot id="st2-14" src="./media/orig/03-14.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 14"></image-slot>
-          <image-slot id="st2-15" src="./media/orig/03-15.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 15"></image-slot>
-          <image-slot id="st2-16" src="./media/orig/03-16.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 16"></image-slot>
-          <image-slot id="st2-17" src="./media/orig/03-17.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 17"></image-slot>
-          <image-slot id="st2-18" src="./media/orig/03-18.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 18"></image-slot>
-          <image-slot id="st2-19" src="./media/orig/03-19.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 19"></image-slot>
-          <image-slot id="st2-20" src="./media/orig/03-20.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 20"></image-slot>
+          <image-slot data-defer id="st2-1" src="./media/orig/03-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 1"></image-slot>
+          <image-slot data-defer id="st2-2" src="./media/orig/03-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 2"></image-slot>
+          <image-slot data-defer id="st2-3" src="./media/orig/03-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 3"></image-slot>
+          <image-slot data-defer id="st2-4" src="./media/orig/03-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 4"></image-slot>
+          <image-slot data-defer id="st2-5" src="./media/orig/03-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 5"></image-slot>
+          <image-slot data-defer id="st2-6" src="./media/orig/03-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 6"></image-slot>
+          <image-slot data-defer id="st2-7" src="./media/orig/03-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 7"></image-slot>
+          <image-slot data-defer id="st2-8" src="./media/orig/03-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 8"></image-slot>
+          <image-slot data-defer id="st2-9" src="./media/orig/03-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 9"></image-slot>
+          <image-slot data-defer id="st2-10" src="./media/orig/03-10.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 10"></image-slot>
+          <image-slot data-defer id="st2-11" src="./media/orig/03-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 11"></image-slot>
+          <image-slot data-defer id="st2-12" src="./media/orig/03-12.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 12"></image-slot>
+          <image-slot data-defer id="st2-13" src="./media/orig/03-13.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 13"></image-slot>
+          <image-slot data-defer id="st2-14" src="./media/orig/03-14.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 14"></image-slot>
+          <image-slot data-defer id="st2-15" src="./media/orig/03-15.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 15"></image-slot>
+          <image-slot data-defer id="st2-16" src="./media/orig/03-16.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 16"></image-slot>
+          <image-slot data-defer id="st2-17" src="./media/orig/03-17.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 17"></image-slot>
+          <image-slot data-defer id="st2-18" src="./media/orig/03-18.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 18"></image-slot>
+          <image-slot data-defer id="st2-19" src="./media/orig/03-19.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 19"></image-slot>
+          <image-slot data-defer id="st2-20" src="./media/orig/03-20.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khar Zurkhnii Khokh Lake — photo 20"></image-slot>
         </sc-if>
         <sc-if value="{{ open3 }}" hint-placeholder-val="{{ false }}">
-          <image-slot id="st3-1" src="./media/orig/04-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 1"></image-slot>
-          <image-slot id="st3-2" src="./media/orig/04-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 2"></image-slot>
-          <image-slot id="st3-3" src="./media/orig/04-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 3"></image-slot>
-          <image-slot id="st3-4" src="./media/orig/04-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 4"></image-slot>
-          <image-slot id="st3-5" src="./media/orig/04-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 5"></image-slot>
-          <image-slot id="st3-6" src="./media/orig/04-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 6"></image-slot>
-          <image-slot id="st3-7" src="./media/orig/04-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 7"></image-slot>
+          <image-slot data-defer id="st3-1" src="./media/orig/04-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 1"></image-slot>
+          <image-slot data-defer id="st3-2" src="./media/orig/04-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 2"></image-slot>
+          <image-slot data-defer id="st3-3" src="./media/orig/04-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 3"></image-slot>
+          <image-slot data-defer id="st3-4" src="./media/orig/04-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 4"></image-slot>
+          <image-slot data-defer id="st3-5" src="./media/orig/04-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 5"></image-slot>
+          <image-slot data-defer id="st3-6" src="./media/orig/04-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 6"></image-slot>
+          <image-slot data-defer id="st3-7" src="./media/orig/04-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="The Hearth of Chinggis Khan — photo 7"></image-slot>
         </sc-if>
         <sc-if value="{{ open4 }}" hint-placeholder-val="{{ false }}">
-          <image-slot id="st4-1" src="./media/orig/05-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 1"></image-slot>
-          <image-slot id="st4-2" src="./media/orig/05-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 2"></image-slot>
-          <image-slot id="st4-3" src="./media/orig/05-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 3"></image-slot>
-          <image-slot id="st4-4" src="./media/orig/05-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 4"></image-slot>
-          <image-slot id="st4-5" src="./media/orig/05-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 5"></image-slot>
-          <image-slot id="st4-6" src="./media/orig/05-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 6"></image-slot>
-          <image-slot id="st4-7" src="./media/orig/05-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 7"></image-slot>
-          <image-slot id="st4-8" src="./media/orig/05-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 8"></image-slot>
-          <image-slot id="st4-9" src="./media/orig/05-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 9"></image-slot>
-          <image-slot id="st4-10" src="./media/orig/05-10.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 10"></image-slot>
-          <image-slot id="st4-11" src="./media/orig/05-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 11"></image-slot>
+          <image-slot data-defer id="st4-1" src="./media/orig/05-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 1"></image-slot>
+          <image-slot data-defer id="st4-2" src="./media/orig/05-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 2"></image-slot>
+          <image-slot data-defer id="st4-3" src="./media/orig/05-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 3"></image-slot>
+          <image-slot data-defer id="st4-4" src="./media/orig/05-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 4"></image-slot>
+          <image-slot data-defer id="st4-5" src="./media/orig/05-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 5"></image-slot>
+          <image-slot data-defer id="st4-6" src="./media/orig/05-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 6"></image-slot>
+          <image-slot data-defer id="st4-7" src="./media/orig/05-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 7"></image-slot>
+          <image-slot data-defer id="st4-8" src="./media/orig/05-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 8"></image-slot>
+          <image-slot data-defer id="st4-9" src="./media/orig/05-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 9"></image-slot>
+          <image-slot data-defer id="st4-10" src="./media/orig/05-10.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 10"></image-slot>
+          <image-slot data-defer id="st4-11" src="./media/orig/05-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Khangal Lake — photo 11"></image-slot>
         </sc-if>
         <sc-if value="{{ open5 }}" hint-placeholder-val="{{ false }}">
-          <image-slot id="st5m-1" src="./media/orig/06-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 1"></image-slot>
-          <image-slot id="st5m-2" src="./media/orig/06-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 2"></image-slot>
-          <image-slot id="st5m-4" src="./media/orig/06-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 4"></image-slot>
-          <image-slot id="st5m-5" src="./media/orig/06-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 5"></image-slot>
-          <image-slot id="st5m-6" src="./media/orig/06-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 6"></image-slot>
-          <image-slot id="st5m-7" src="./media/orig/06-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 7"></image-slot>
-          <image-slot id="st5m-8" src="./media/orig/06-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 8"></image-slot>
-          <image-slot id="st5m-9" src="./media/orig/06-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 9"></image-slot>
-          <image-slot id="st5m-10" src="./media/orig/06-10.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 10"></image-slot>
-          <image-slot id="st5m-11" src="./media/orig/06-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 11"></image-slot>
-          <image-slot id="st5m-12" src="./media/orig/06-12.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 12"></image-slot>
-          <image-slot id="st5m-13" src="./media/orig/06-13.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 13"></image-slot>
-          <image-slot id="st5m-14" src="./media/orig/06-14.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 14"></image-slot>
-          <image-slot id="st5m-15" src="./media/orig/06-15.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 15"></image-slot>
-          <image-slot id="st5m-16" src="./media/orig/06-16.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 16"></image-slot>
-          <image-slot id="st5m-17" src="./media/orig/06-17.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 17"></image-slot>
-          <image-slot id="st5m-18" src="./media/orig/06-18.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 18"></image-slot>
-          <image-slot id="st5m-19" src="./media/orig/06-19.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 19"></image-slot>
-          <image-slot id="st5m-20" src="./media/orig/06-20.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 20"></image-slot>
-          <image-slot id="st5m-21" src="./media/orig/06-21.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 21"></image-slot>
+          <image-slot data-defer id="st5m-1" src="./media/orig/06-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 1"></image-slot>
+          <image-slot data-defer id="st5m-2" src="./media/orig/06-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 2"></image-slot>
+          <image-slot data-defer id="st5m-4" src="./media/orig/06-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 4"></image-slot>
+          <image-slot data-defer id="st5m-5" src="./media/orig/06-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 5"></image-slot>
+          <image-slot data-defer id="st5m-6" src="./media/orig/06-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 6"></image-slot>
+          <image-slot data-defer id="st5m-7" src="./media/orig/06-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 7"></image-slot>
+          <image-slot data-defer id="st5m-8" src="./media/orig/06-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 8"></image-slot>
+          <image-slot data-defer id="st5m-9" src="./media/orig/06-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 9"></image-slot>
+          <image-slot data-defer id="st5m-10" src="./media/orig/06-10.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 10"></image-slot>
+          <image-slot data-defer id="st5m-11" src="./media/orig/06-11.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 11"></image-slot>
+          <image-slot data-defer id="st5m-12" src="./media/orig/06-12.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 12"></image-slot>
+          <image-slot data-defer id="st5m-13" src="./media/orig/06-13.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 13"></image-slot>
+          <image-slot data-defer id="st5m-14" src="./media/orig/06-14.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 14"></image-slot>
+          <image-slot data-defer id="st5m-15" src="./media/orig/06-15.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 15"></image-slot>
+          <image-slot data-defer id="st5m-16" src="./media/orig/06-16.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 16"></image-slot>
+          <image-slot data-defer id="st5m-17" src="./media/orig/06-17.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 17"></image-slot>
+          <image-slot data-defer id="st5m-18" src="./media/orig/06-18.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 18"></image-slot>
+          <image-slot data-defer id="st5m-19" src="./media/orig/06-19.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 19"></image-slot>
+          <image-slot data-defer id="st5m-20" src="./media/orig/06-20.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 20"></image-slot>
+          <image-slot data-defer id="st5m-21" src="./media/orig/06-21.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Baldan Bereeven Monastery — photo 21"></image-slot>
         </sc-if>
         <sc-if value="{{ open6 }}" hint-placeholder-val="{{ false }}">
-          <image-slot id="st6c-1" src="./media/orig/07-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="13th Century Complex — photo 1"></image-slot>
-          <image-slot id="st6c-2" src="./media/orig/07-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="13th Century Complex — photo 2"></image-slot>
-          <image-slot id="st6c-3" src="./media/orig/07-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="13th Century Complex — photo 3"></image-slot>
-          <image-slot id="st6c-4" src="./media/orig/07-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="13th Century Complex — photo 4"></image-slot>
+          <image-slot data-defer id="st6c-1" src="./media/orig/07-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="13th Century Complex — photo 1"></image-slot>
+          <image-slot data-defer id="st6c-2" src="./media/orig/07-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="13th Century Complex — photo 2"></image-slot>
+          <image-slot data-defer id="st6c-3" src="./media/orig/07-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="13th Century Complex — photo 3"></image-slot>
+          <image-slot data-defer id="st6c-4" src="./media/orig/07-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="13th Century Complex — photo 4"></image-slot>
         </sc-if>
         <sc-if value="{{ open7 }}" hint-placeholder-val="{{ false }}">
-          <image-slot id="st7h-1" src="./media/orig/08-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 1"></image-slot>
-          <image-slot id="st7h-2" src="./media/orig/08-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 2"></image-slot>
-          <image-slot id="st7h-3" src="./media/orig/08-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 3"></image-slot>
-          <image-slot id="st7h-4" src="./media/orig/08-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 4"></image-slot>
-          <image-slot id="st7h-5" src="./media/orig/08-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 5"></image-slot>
-          <image-slot id="st7h-6" src="./media/orig/08-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 6"></image-slot>
-          <image-slot id="st7h-7" src="./media/orig/08-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 7"></image-slot>
-          <image-slot id="st7h-8" src="./media/orig/08-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 8"></image-slot>
-          <image-slot id="st7h-9" src="./media/orig/08-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 9"></image-slot>
+          <image-slot data-defer id="st7h-1" src="./media/orig/08-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 1"></image-slot>
+          <image-slot data-defer id="st7h-2" src="./media/orig/08-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 2"></image-slot>
+          <image-slot data-defer id="st7h-3" src="./media/orig/08-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 3"></image-slot>
+          <image-slot data-defer id="st7h-4" src="./media/orig/08-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 4"></image-slot>
+          <image-slot data-defer id="st7h-5" src="./media/orig/08-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 5"></image-slot>
+          <image-slot data-defer id="st7h-6" src="./media/orig/08-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 6"></image-slot>
+          <image-slot data-defer id="st7h-7" src="./media/orig/08-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 7"></image-slot>
+          <image-slot data-defer id="st7h-8" src="./media/orig/08-8.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 8"></image-slot>
+          <image-slot data-defer id="st7h-9" src="./media/orig/08-9.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Hustai National Park — photo 9"></image-slot>
         </sc-if>
         <sc-if value="{{ open8 }}" hint-placeholder-val="{{ false }}">
-          <image-slot id="st8f-1" src="./media/orig/09-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 1"></image-slot>
-          <image-slot id="st8f-2" src="./media/orig/09-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 2"></image-slot>
-          <image-slot id="st8f-3" src="./media/orig/09-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 3"></image-slot>
-          <image-slot id="st8f-4" src="./media/orig/09-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 4"></image-slot>
-          <image-slot id="st8f-5" src="./media/orig/09-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 5"></image-slot>
-          <image-slot id="st8f-6" src="./media/orig/09-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 6"></image-slot>
-          <image-slot id="st8f-7" src="./media/orig/09-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 7"></image-slot>
+          <image-slot data-defer id="st8f-1" src="./media/orig/09-1.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 1"></image-slot>
+          <image-slot data-defer id="st8f-2" src="./media/orig/09-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 2"></image-slot>
+          <image-slot data-defer id="st8f-3" src="./media/orig/09-3.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 3"></image-slot>
+          <image-slot data-defer id="st8f-4" src="./media/orig/09-4.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 4"></image-slot>
+          <image-slot data-defer id="st8f-5" src="./media/orig/09-5.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 5"></image-slot>
+          <image-slot data-defer id="st8f-6" src="./media/orig/09-6.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 6"></image-slot>
+          <image-slot data-defer id="st8f-7" src="./media/orig/09-7.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Other Gallery — photo 7"></image-slot>
         </sc-if>
         </div>
         <sc-if value="{{ open0 }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;left:16px;top:16px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.94);font:700 10px Archivo,sans-serif;letter-spacing:.28em;color:#1a63d8">01</div></sc-if>
@@ -1415,7 +1436,7 @@ class Component extends DCLogic {
     this._supaPaintDetail();
     requestAnimationFrame(() => this._supaPaintDetail());
     { const yf = document.getElementById('dt-det-yt'), w = this.state.detYt; if (yf && w && yf.dataset.vid !== w) { yf.dataset.vid = w; yf.src = 'https://www.youtube.com/embed/' + w + '?autoplay=1&mute=1&loop=1&playlist=' + w + '&playsinline=1&rel=0&modestbranding=1'; } }
-    if (this._detOpenSeen !== this.state.openStop) { this._detOpenSeen = this.state.openStop; this._loadDetVid(); }
+    if (this._detOpenSeen !== this.state.openStop) { this._detOpenSeen = this.state.openStop; this._loadDetVid(); if (this.state.openStop !== null) [60, 300, 900].forEach(ms => setTimeout(() => this._warmCarousel(), ms)); }
     { const dv = document.getElementById('dt-det-vid'); const want = this.state.detVid || ''; if (dv && want && dv.getAttribute('src') !== want) { dv.controls = true; this._prepVideo(dv, true); dv.setAttribute('src', want); dv.play().catch(() => {}); } }
     if (ps && ps.openStop !== this.state.openStop && this.state.openStop !== null) {
       setTimeout(() => this._restoreSlots('gallery'), 30);
@@ -1424,7 +1445,6 @@ class Component extends DCLogic {
   }
   componentDidMount() {
     setTimeout(() => { const t = document.querySelector('#dt-hero-yt iframe'); if (!t) return; this.renderVals(); const go = () => this._heroYtLoad(t); t.addEventListener('load', go); go(); }, 0);
-    (() => { const p = document.getElementById('dt-hero-poster'); if (!p) return; const hq = "url('https://img.youtube.com/vi/maX2DMex6aU/hqdefault.jpg')"; const im = new Image(); im.onload = () => { if (im.naturalWidth <= 120) p.style.backgroundImage = hq; }; im.onerror = () => { p.style.backgroundImage = hq; }; im.src = 'https://img.youtube.com/vi/maX2DMex6aU/maxresdefault.jpg'; })();
     ['dt-hero-vid', 'dt-cta-vid'].concat(Array.from({ length: 9 }, (_, k) => 'dt-pan-vid-' + k)).forEach(id => {
       const el = document.getElementById(id);
       if (el) this._prepVideo(el, true);
@@ -1467,17 +1487,57 @@ class Component extends DCLogic {
 
     // background section films: load when near the viewport, pause when far away
     document.querySelectorAll('video[data-bgsrc]').forEach(v => {
+      v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true;
       v.addEventListener('playing', () => { const im = v.parentNode.querySelector('image-slot'); if (im) im.style.display = 'none'; }, { once: true });
       if (!('IntersectionObserver' in window)) { v.src = v.dataset.bgsrc; v.play().catch(() => {}); return; }
       new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting) {
+        if (e.isIntersecting && !this._saveData()) {
           if (!v.getAttribute('src')) v.src = v.dataset.bgsrc;
           v.play().catch(() => {});
         } else if (!v.paused) v.pause();
       }), { rootMargin: '400px' }).observe(v);
     });
 
-    setTimeout(() => this._fillCards(), 400);
+    // ---- performance: do the heavy work only when it is about to be seen ----
+    // (1) journey section: cards, thumbnails and panel photos are painted when it approaches
+    const markNear = () => {
+      if (this._journeyNear) return;
+      this._journeyNear = true;
+      this._flushPanelBg(); this._syncPanelBg(); this._fillCards(); this._paintStop(); this._warmPanels();
+    };
+    const jrnEl = document.getElementById('journey');
+    if (jrnEl && 'IntersectionObserver' in window) {
+      new IntersectionObserver((es, io) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); markNear(); } }, { rootMargin: '1400px 0px' }).observe(jrnEl);
+    } else markNear();
+    // (2) pop-up carousel: warm the slides next to the visible one
+    let carRaf = 0;
+    document.addEventListener('scroll', e => {
+      if (!e.target || e.target.id !== 'dt-carousel' || carRaf) return;
+      carRaf = requestAnimationFrame(() => { carRaf = 0; this._warmCarousel(); });
+    }, true);
+    // (3) YouTube films: the hero starts once the page has loaded, the CTA only when it is near; both pause off-screen
+    [['#dt-hero-yt iframe', '#top', 0], ['#dt-cta-yt iframe', '#dt-cta-yt', 900]].forEach(([sel, boxSel, margin]) => {
+      const f = document.querySelector(sel), box = document.querySelector(boxSel);
+      if (!f || !box) return;
+      let visible = true, started = false;
+      const start = () => { if (started || this._saveData()) return; started = true; f.src = f.dataset.src; };
+      const sync = () => [900, 1800, 3200].forEach(ms => setTimeout(() => { if (started) this._ytCmd(f, visible ? 'playVideo' : 'pauseVideo'); }, ms));
+      f.addEventListener('load', () => { if (f.getAttribute('src')) sync(); });
+      if (!('IntersectionObserver' in window)) { start(); return; }
+      new IntersectionObserver(es => es.forEach(e => {
+        visible = e.isIntersecting;
+        if (started) this._ytCmd(f, visible ? 'playVideo' : 'pauseVideo');
+      }), { rootMargin: '80px 0px' }).observe(box);
+      if (margin) {
+        new IntersectionObserver((es, io) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: margin + 'px 0px' }).observe(box);
+      } else {
+        // hero: as soon as its poster is in (the page keeps the poster until the film plays); 3s at most
+        const pim = new Image();
+        pim.onload = pim.onerror = () => setTimeout(start, 200);
+        pim.src = '/images/hero-poster.jpg';
+        setTimeout(start, 3000);
+      }
+    });
 
     // horizontal chapters drive the active stop
     const track = document.getElementById('dt-htrack');
@@ -1607,7 +1667,8 @@ class Component extends DCLogic {
         const s = document.getElementById(id);
         if (!s || !s.hasAttribute('data-filled')) return null;
         const im = s.shadowRoot && s.shadowRoot.querySelector('.frame img');
-        return im && im.src ? im.src : null;
+        // deferred slots have no <img src> yet: fall back to the url they will show
+        return (im && im.src) || (/^pan-bg-/.test(s.id) && s.photoUrl ? new URL(s.photoUrl, location.href).href : null);
       }).filter(Boolean);
       if (!srcs.length) return null;
       return srcs[Math.floor(Math.random() * srcs.length)];
@@ -1891,11 +1952,18 @@ class Component extends DCLogic {
   _paintPanelBg(i, url, e) {
     const scale = Math.max(1, +((e && e.s) || 1));
     const px = 50 + (+((e && e.x) || 0)) * 100, py = 50 + (+((e && e.y) || 0)) * 100;
+    // Performance: site photos (http urls) are painted only when the journey section is near, rail/map
+    // cards use thumbnails and the full panel photo only the active stop +/- 1. Photos dropped in by an
+    // editor (data:/blob:) keep the old immediate behaviour.
+    const local = /^(data:|blob:)/.test(url);
+    if (!local && !this._journeyNear) { (this._panelBgPending = this._panelBgPending || {})[i] = [url, e]; return; }
     [['dt-pan-img-' + i, true], ['dt-rail-img-' + i, false], ['dt-node-img-' + i, false]].forEach(([id, framed]) => {
       const el = document.getElementById(id);
-      if (!el || el.dataset.bgSrc === url) return;
-      el.dataset.bgSrc = url;
-      el.style.backgroundImage = 'url("' + url + '")';
+      const u = local || framed ? url : this._thumb(url);
+      if (!el || el.dataset.bgSrc === u) return;
+      if (framed && !local && Math.abs(i - this.state.active) > 1) { (this._panelBgPending = this._panelBgPending || {})[i] = [url, e]; return; }
+      el.dataset.bgSrc = u;
+      el.style.backgroundImage = 'url("' + u + '")';
       el.style.backgroundSize = framed && scale > 1 ? (scale * 100).toFixed(2) + '%' : 'cover';
       el.style.backgroundPosition = framed ? px.toFixed(2) + '% ' + py.toFixed(2) + '%' : 'center';
     });
@@ -2091,11 +2159,7 @@ class Component extends DCLogic {
   _captureStopPhotos() { return this._captureSlots(); }
   _restoreStopPhotos() { return this._restoreSlots(); }
   async _restorePanelBg() {
-    let state = null;
-    try {
-      const r = await fetch('image-slots.json', { cache: 'no-store' });
-      state = r.ok ? await r.json() : null;
-    } catch (e) {}
+    const state = await this._sidecar();
     for (let i = 0; i < 9; i++) {
       const e = state && state['pan-bg-' + i];
       let u = e && (typeof e === 'string' ? e : e.u);
@@ -2109,16 +2173,22 @@ class Component extends DCLogic {
       const s = document.getElementById('pan-bg-' + i);
       if (!s) continue;
       const im = s.shadowRoot && s.shadowRoot.querySelector('img');
-      const src = im && im.src && /^(data:|blob:|https?:)/.test(im.src) ? im.src : null;
+      let src = im && im.src && /^(data:|blob:|https?:)/.test(im.src) ? im.src : null;
+      if (!src && s.photoUrl && !/^(data|blob):/i.test(s.photoUrl)) src = new URL(s.photoUrl, location.href).href;
       if (src) {
         s.style.opacity = '1';
-        ['dt-pan-img-' + i, 'dt-rail-img-' + i, 'dt-node-img-' + i].forEach(id => {
-          const t = document.getElementById(id);
-          if (t && t.dataset.bgSrc !== src) {
-            t.dataset.bgSrc = src;
-            t.style.backgroundImage = 'url("' + src + '")';
-          }
-        });
+        // Performance: card/rail/map backgrounds are painted only once the journey section is
+        // near, rail + map use small thumbnails, and full panel photos only for the active stop +/- 1.
+        if (this._journeyNear) {
+          const near = Math.abs(i - this.state.active) <= 1;
+          [['dt-pan-img-' + i, near, src], ['dt-rail-img-' + i, true, this._thumb(src)], ['dt-node-img-' + i, true, this._thumb(src)]].forEach(([id, ok, u]) => {
+            const t = document.getElementById(id);
+            if (ok && t && t.dataset.bgSrc !== u) {
+              t.dataset.bgSrc = u;
+              t.style.backgroundImage = 'url("' + u + '")';
+            }
+          });
+        }
       }
       if (!s.dataset.bgWired) {
         s.dataset.bgWired = '1';
@@ -2281,6 +2351,7 @@ class Component extends DCLogic {
   }
   _pauseFarClips() {
     const i = this.state.active;
+    if (this._journeyNear) this._warmPanels();
     [i - 1, i, i + 1].forEach(k => { if (k >= 0 && k <= 8) this._restoreFilm(k); });
     for (let k = 0; k < 9; k++) {
       const v = document.getElementById('dt-pan-vid-' + k);
@@ -2289,15 +2360,55 @@ class Component extends DCLogic {
       else if (!v.paused) v.pause();
     }
   }
+  // small thumbnail for the rail / map cards (the full panel photo is only needed behind the active panel)
+  _thumb(src) {
+    const m = /\/media\/panels\/(\d\d)\.webp(?:[?#].*)?$/.exec(src || '');
+    return m ? './media/thumbs/p' + m[1] + '.jpg' : src;
+  }
+  _flushPanelBg() {
+    const p = this._panelBgPending;
+    if (!p || !this._journeyNear) return;
+    Object.keys(p).forEach(k => { const v = p[k]; delete p[k]; this._paintPanelBg(+k, v[0], v[1]); });
+  }
+  // lazy <image-slot> photos inside horizontal scrollers load too late by themselves: pre-warm neighbours
+  _warmPanels() {
+    const i = this.state.active;
+    [i - 1, i, i + 1].forEach(k => {
+      const s = k >= 0 && k <= 8 ? document.getElementById('pan-bg-' + k) : null;
+      if (s && s.loadNow) s.loadNow(k === i ? 'high' : 'low');
+    });
+  }
+  _warmCarousel() {
+    const c = document.getElementById('dt-carousel');
+    if (!c) return;
+    const kids = c.children, cur = Math.round(c.scrollLeft / (c.clientWidth || 1));
+    for (let k = Math.max(0, cur - 1); k <= cur + 2 && k < kids.length; k++) {
+      if (kids[k] && kids[k].loadNow) kids[k].loadNow(k === cur ? 'high' : 'low');
+    }
+  }
+  // Data Saver / 2G visitors keep the poster photos and skip the background films
+  _saveData() {
+    const c = navigator.connection;
+    return !!(c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || '')));
+  }
+  _ytCmd(f, func) {
+    try {
+      const w = f.contentWindow;
+      w.postMessage(JSON.stringify({ event: 'listening', id: f.closest('#dt-cta-yt') ? 'dt-cta' : 'dt-hero' }), '*');
+      w.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+    } catch (_) {}
+  }
   _fillCards() {
+    if (!this._journeyNear) return;   // painted once the journey section approaches (see componentDidMount)
     let missing = 0;
     for (let k = 0; k < 9; k++) {
       const src = window.DT_STOP_IMAGE ? window.DT_STOP_IMAGE(k) : null;
-      const targets = [document.getElementById('dt-pan-img-' + k), document.getElementById('dt-rail-img-' + k), document.getElementById('dt-node-img-' + k)];
+      const near = Math.abs(k - this.state.active) <= 1;
+      const targets = [[document.getElementById('dt-pan-img-' + k), src, near], [document.getElementById('dt-rail-img-' + k), this._thumb(src), true], [document.getElementById('dt-node-img-' + k), this._thumb(src), true]];
       let any = false;
-      targets.forEach(t => {
-        if (!t || t.dataset.set) return;
-        if (src) { t.style.backgroundImage = 'url("' + src + '")'; t.dataset.set = '1'; any = true; }
+      targets.forEach(([t, u, ok]) => {
+        if (!t || t.dataset.set || !ok) return;
+        if (u) { t.style.backgroundImage = 'url("' + u + '")'; t.dataset.set = '1'; any = true; }
       });
       if (!src) missing++;
     }
@@ -2336,10 +2447,11 @@ class Component extends DCLogic {
     set('dt-cap-name', info.n);
     set('dt-cap-coord', info.m);
     const simg = document.getElementById('dt-stage-img');
-    if (simg) {
+    if (simg && this._journeyNear) {
       const src = window.DT_STOP_IMAGE ? window.DT_STOP_IMAGE(i) : null;
       simg.style.backgroundImage = src ? 'url("' + src + '")' : 'none';
     }
+    if (this._journeyNear) { this._flushPanelBg(); this._fillCards(); this._warmPanels(); }
     // list + filmstrip rows only — the itinerary cards own their own transform
     document.querySelectorAll('#dt-stoplist [data-jump], #dt-strip [data-jump]').forEach(a => {
       const on = +a.dataset.jump === i;
