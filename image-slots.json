@@ -1,0 +1,62 @@
+{
+ "ch2-statue": {
+  "u": "./media/extra/ch2-statue.webp",
+  "s": 1,
+  "x": 0,
+  "y": 0
+ },
+ "ch1-leaving": {
+  "s": 1.0254170534423657,
+  "x": -1.2708526721182807,
+  "y": -1.4565646853030856,
+  "u": "./media/extra/ch1-leaving.webp"
+ },
+ "st0-1": {
+  "s": 1.1921178385591402,
+  "x": 9.605891927957,
+  "y": 5.207787280845622,
+  "u": "./media/stops/01-1.webp"
+ },
+ "cover-0": {
+  "s": 1,
+  "x": 0,
+  "y": 0,
+  "u": "./media/thumbs/01.webp"
+ },
+ "cta-landscape": {
+  "u": "./media/slots/cta-landscape.webp",
+  "s": 1,
+  "x": 0,
+  "y": 0
+ },
+ "pan-bg-0": {
+  "u": "./media/panels/01.webp",
+  "s": 1,
+  "x": 0,
+  "y": 0
+ },
+ "pan-bg-1": {
+  "s": 1,
+  "x": 0,
+  "y": 0,
+  "u": "./media/panels/02.webp"
+ },
+ "pan-bg-2": {
+  "u": "./media/panels/03.webp",
+  "s": 1,
+  "x": 0,
+  "y": 0
+ },
+ "about-guides": {
+  "s": 1.0254170534423657,
+  "x": -1.2708526721182807,
+  "y": -1.4565646853030856,
+  "u": "./media/about/guides.webp"
+ },
+ "about-horses": {
+  "u": "./media/about/horses.webp",
+  "s": 1,
+  "x": 0,
+  "y": 0
+ }
+}
