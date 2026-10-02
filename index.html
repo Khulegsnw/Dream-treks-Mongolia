@@ -991,6 +991,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
     <div id="dt-detail" onClick="{{ eat }}" style="position:relative;display:flex;flex-direction:column;width:min(1060px,95vw);max-height:96vh;overflow:auto;background:#ffffff;border-radius:24px;box-shadow:0 50px 120px rgba(14,12,9,.5);animation:dt-pop .45s cubic-bezier(.2,.85,.25,1)">
       <div style="position:relative;background:#f1ede5">
         <div id="dt-carousel" style="display:flex;align-items:stretch;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;height:800px;min-height:800px;flex:0 0 800px;background:#0e0c09">
+        <sc-if value="{{ hasDetYt }}" hint-placeholder-val="{{ false }}"><div style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center;position:relative;background:#0e0c09"><iframe id="dt-det-yt" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe></div></sc-if>
         <sc-if value="{{ hasDetVid }}" hint-placeholder-val="{{ false }}"><div style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center;position:relative;background:#0e0c09"><video id="dt-det-vid" controls="" playsInline="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></div></sc-if>
         <sc-if value="{{ open0 }}" hint-placeholder-val="{{ false }}">
           <image-slot id="st0u-2" src="./media/orig/ub-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Chinggis Khaan statue"></image-slot>
@@ -1413,6 +1414,7 @@ class Component extends DCLogic {
     this._supaPaintPanels();
     this._supaPaintDetail();
     requestAnimationFrame(() => this._supaPaintDetail());
+    { const yf = document.getElementById('dt-det-yt'), w = this.state.detYt; if (yf && w && yf.dataset.vid !== w) { yf.dataset.vid = w; yf.src = 'https://www.youtube.com/embed/' + w + '?autoplay=1&mute=1&loop=1&playlist=' + w + '&playsinline=1&rel=0&modestbranding=1'; } }
     if (this._detOpenSeen !== this.state.openStop) { this._detOpenSeen = this.state.openStop; this._loadDetVid(); }
     { const dv = document.getElementById('dt-det-vid'); const want = this.state.detVid || ''; if (dv && want && dv.getAttribute('src') !== want) { dv.controls = true; this._prepVideo(dv, true); dv.setAttribute('src', want); dv.play().catch(() => {}); } }
     if (ps && ps.openStop !== this.state.openStop && this.state.openStop !== null) {
@@ -2180,11 +2182,12 @@ class Component extends DCLogic {
   }
   async _loadDetVid() {
     const i = this.state.openStop;
-    if (i === null) { if (this.state.detVid) this.setState({ detVid: null, detLocal: false }); return; }
+    if (i === null) { if (this.state.detVid || this.state.detYt) this.setState({ detVid: null, detYt: null, detLocal: false }); return; }
     /* stop-ийн дэлгэрэнгүй цонхны статик бичлэг (repo доторх /videos): 0-based stop индекс */
-    const STATIC_DET = { 2: './videos/khar-zurkhnii-swans.mp4' };
+    const STATIC_DET = { 2: 'yt:uAT8d1orQb4' };
     if (STATIC_DET[i]) {
-      if (this.state.detVid !== STATIC_DET[i] || this.state.detLocal) this.setState({ detVid: STATIC_DET[i], detLocal: false });
+      const sv = STATIC_DET[i], yt = /^yt:/.test(sv) ? sv.slice(3) : null;
+      if (this.state.detVid !== (yt ? null : sv) || this.state.detYt !== yt || this.state.detLocal) this.setState({ detVid: yt ? null : sv, detYt: yt, detLocal: false });
       [60, 250, 700].forEach(ms => setTimeout(() => { const c = document.getElementById('dt-carousel'); if (c && this.state.openStop === i && c.scrollLeft > 0 && !c.dataset.userMoved) { c.style.scrollBehavior = 'auto'; c.scrollLeft = 0; } }, ms));
       return;
     }
@@ -2197,7 +2200,7 @@ class Component extends DCLogic {
     } catch (e) {}
     if (!url) url = remote || null;
     if (this.state.openStop !== i) return;
-    if (this.state.detVid !== url || this.state.detLocal !== local) this.setState({ detVid: url, detLocal: local });
+    if (this.state.detVid !== url || this.state.detLocal !== local || this.state.detYt) this.setState({ detVid: url, detYt: null, detLocal: local });
   }
   _pickDetVid() {
     const i = this.state.openStop;
@@ -2384,6 +2387,7 @@ class Component extends DCLogic {
       open5: i === 5, open6: i === 6, open7: i === 7, open8: i === 8,
       modalOpen: i !== null,
       hasDetVid: i !== null && !!this.state.detVid,
+      hasDetYt: i !== null && !!this.state.detYt,
       detVidSrc: this.state.detVid || '',
       hasLocalDetVid: i !== null && !!this.state.detLocal,
       pickDetVid: () => this._pickDetVid(),
