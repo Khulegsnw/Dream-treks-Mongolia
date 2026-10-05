@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preload" href="/vendor/react.production.min.js" as="script" crossorigin="anonymous">
 <link rel="preload" href="/vendor/react-dom.production.min.js" as="script" crossorigin="anonymous">
-<link rel="preload" href="/images/hero-poster.jpg" as="image" fetchpriority="low">
+<link rel="preload" href="/images/hero-poster-2.jpg" as="image" fetchpriority="low">
 <link rel="preconnect" href="https://www.youtube.com">
 <link rel="preload" href="/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
@@ -111,7 +111,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
 </style>
 <template id="__bundler_thumbnail"><svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="240" fill="#3181fa"></rect><g transform="translate(72,84)"><path d="M0 48 C 18 12, 40 12, 58 34 S 80 56, 96 24" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-dasharray="4 12"></path><circle cx="0" cy="48" r="10" fill="#ffaf1d"></circle><circle cx="96" cy="24" r="10" fill="#ffffff"></circle></g><text x="120" y="196" text-anchor="middle" fill="#ffffff" font-family="Archivo,sans-serif" font-size="22" font-weight="700" letter-spacing="4">DT</text></svg></template>
 <style>@keyframes dt-ld-fill{0%{clip-path:inset(0 100% 0 0)}70%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 0)}}@keyframes dt-ld-bar{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}</style>
-<script>(function(){var t0=Date.now(),ready=false,done=false;function hide(){var el=document.getElementById('dt-loader');if(!el)return;var w=Math.max(0,900-(Date.now()-t0));setTimeout(function(){var p=document.getElementById('dt-pre');if(p)p.remove();el.style.opacity='0';el.style.visibility='hidden';setTimeout(function(){el.remove&&el.remove();},900);},w);}/* hide the splash as soon as the hero photo is in (not when every last image/film has loaded); 1.8s at most, as before */var im=new Image();im.onload=im.onerror=function(){ready=true;};im.src='/images/hero-poster.jpg';(function poll(){var pre=document.getElementById('dt-pre'),el=document.getElementById('dt-loader');if(pre&&el&&el.getClientRects().length)pre.remove();if(done)return;if(ready&&el&&el.getClientRects().length){done=true;hide();return;}if(Date.now()-t0<1800)setTimeout(poll,60);else{done=true;hide();}})();if(document.readyState==='complete')hide();else window.addEventListener('load',hide);setTimeout(hide,1800);setTimeout(function(){var pre=document.getElementById('dt-pre');if(pre)pre.remove();},6000);})();</script>
+<script>(function(){var t0=Date.now(),ready=false,done=false;function hide(){var el=document.getElementById('dt-loader');if(!el)return;var w=Math.max(0,900-(Date.now()-t0));setTimeout(function(){var p=document.getElementById('dt-pre');if(p)p.remove();el.style.opacity='0';el.style.visibility='hidden';setTimeout(function(){el.remove&&el.remove();},900);},w);}/* hide the splash as soon as the hero photo is in (not when every last image/film has loaded); 1.8s at most, as before */var im=new Image();im.onload=im.onerror=function(){ready=true;};im.src='/images/hero-poster-2.jpg';(function poll(){var pre=document.getElementById('dt-pre'),el=document.getElementById('dt-loader');if(pre&&el&&el.getClientRects().length)pre.remove();if(done)return;if(ready&&el&&el.getClientRects().length){done=true;hide();return;}if(Date.now()-t0<1800)setTimeout(poll,60);else{done=true;hide();}})();if(document.readyState==='complete')hide();else window.addEventListener('load',hide);setTimeout(hide,1800);setTimeout(function(){var pre=document.getElementById('dt-pre');if(pre)pre.remove();},6000);})();</script>
 </helmet>
 <div id="dt-loader" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;background:#0e0c09;color:#ffffff;transition:opacity .8s ease,visibility .8s ease">
   <div style="position:relative;width:min(320px,62vw);aspect-ratio:703.21/304.21">
@@ -149,8 +149,8 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
 
 <header id="top" data-screen-label="Hero" style="position:relative;height:100vh;min-height:560px;overflow:hidden">
   <div id="dt-hero-media" style="position:absolute;inset:-4%;animation:dt-kenburns 44s ease-in-out infinite alternate;will-change:transform">
-    <div id="dt-hero-poster" style="position:absolute;inset:0;background-color:#1a1a1a;background-image:url('/images/hero-poster.jpg');background-size:cover;background-position:center;background-repeat:no-repeat"></div>
-    <div id="dt-hero-yt" style="position:absolute;inset:0;overflow:hidden;pointer-events:none"><iframe data-src="https://www.youtube.com/embed/maX2DMex6aU?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=maX2DMex6aU&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;showinfo=0&amp;iv_load_policy=3&amp;disablekb=1&amp;fs=0&amp;enablejsapi=1" title="Baldan bereeven Monastery" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true" style="position:absolute;top:50%;left:50%;width:max(108vw,192vh);height:max(60.75vw,108vh);transform:translate(-50%,-50%) scale(1.12);border:0;pointer-events:none;opacity:0;transition:opacity 1s ease"></iframe></div>
+    <div id="dt-hero-poster" style="position:absolute;inset:0;background-color:#1a1a1a;background-image:url('/images/hero-poster-2.jpg');background-size:cover;background-position:center;background-repeat:no-repeat"></div>
+    <div id="dt-hero-yt" style="position:absolute;inset:0;overflow:hidden;pointer-events:none"><iframe data-src="https://www.youtube.com/embed/1rQ5JC3DtMc?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=1rQ5JC3DtMc&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;showinfo=0&amp;iv_load_policy=3&amp;disablekb=1&amp;fs=0&amp;enablejsapi=1" title="Khangal lake" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true" style="position:absolute;top:50%;left:50%;width:max(108vw,192vh);height:max(60.75vw,108vh);transform:translate(-50%,-50%) scale(1.12);border:0;pointer-events:none;opacity:0;transition:opacity 1s ease"></iframe></div>
   </div>
   <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(14,12,9,.44) 0%,rgba(14,12,9,.2) 40%,rgba(14,12,9,.17) 62%,rgba(14,12,9,.34) 88%,rgba(255,255,255,.35) 100%)"></div>
   <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 50% 46%,rgba(14,12,9,.26) 0%,rgba(14,12,9,0) 100%)"></div>
@@ -1538,7 +1538,7 @@ class Component extends DCLogic {
         // hero: as soon as its poster is in (the page keeps the poster until the film plays); 3s at most
         const pim = new Image();
         pim.onload = pim.onerror = () => setTimeout(start, 200);
-        pim.src = '/images/hero-poster.jpg';
+        pim.src = '/images/hero-poster-2.jpg';
         setTimeout(start, 3000);
       }
     });
