@@ -1017,6 +1017,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       <div style="position:relative;background:#f1ede5">
         <div id="dt-carousel" style="display:flex;align-items:stretch;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;height:800px;min-height:800px;flex:0 0 800px;background:#0e0c09">
         <sc-if value="{{ hasDetYt }}" hint-placeholder-val="{{ false }}"><div style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center;position:relative;background:#0e0c09"><iframe id="dt-det-yt" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe></div></sc-if>
+        <sc-if value="{{ hasDetYt2 }}" hint-placeholder-val="{{ false }}"><div style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center;position:relative;background:#0e0c09"><iframe id="dt-det-yt2" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe></div></sc-if>
         <sc-if value="{{ hasDetVid }}" hint-placeholder-val="{{ false }}"><div style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center;position:relative;background:#0e0c09"><video id="dt-det-vid" controls="" playsInline="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></div></sc-if>
         <sc-if value="{{ open0 }}" hint-placeholder-val="{{ false }}">
           <image-slot data-defer id="st0u-2" src="./media/orig/ub-2.jpg" style="flex:0 0 100%;align-self:stretch;scroll-snap-align:center" shape="rect" fit="cover" placeholder="Ulaanbaatar — Chinggis Khaan statue"></image-slot>
@@ -1439,8 +1440,10 @@ class Component extends DCLogic {
     this._supaPaintPanels();
     this._supaPaintDetail();
     requestAnimationFrame(() => this._supaPaintDetail());
-    { const yf = document.getElementById('dt-det-yt'), w = this.state.detYt; if (yf && w && yf.dataset.vid !== w) { yf.dataset.vid = w; yf.src = 'https://www.youtube.com/embed/' + w + '?autoplay=1&mute=1&loop=1&playlist=' + w + '&playsinline=1&rel=0&modestbranding=1'; } }
-    if (this._detOpenSeen !== this.state.openStop) { this._detOpenSeen = this.state.openStop; this._loadDetVid(); if (this.state.openStop !== null) [60, 300, 900].forEach(ms => setTimeout(() => this._warmCarousel(), ms)); }
+    { const ytUrl = w => 'https://www.youtube.com/embed/' + w + '?autoplay=1&mute=1&loop=1&playlist=' + w + '&playsinline=1&rel=0&modestbranding=1&enablejsapi=1';
+      const yf = document.getElementById('dt-det-yt'), w = this.state.detYt; if (yf && w && yf.dataset.vid !== w) { yf.dataset.vid = w; yf.src = ytUrl(w); }
+      const yf2 = document.getElementById('dt-det-yt2'), w2 = this.state.detYt2; if (yf2 && w2 && yf2.dataset.vid !== w2) { yf2.dataset.vid = w2; yf2.dataset.src = ytUrl(w2); } }
+    if (this._detOpenSeen !== this.state.openStop) { this._detOpenSeen = this.state.openStop; this._modalCur = -1; this._loadDetVid(); if (this.state.openStop !== null) [60, 300, 900].forEach(ms => setTimeout(() => this._warmCarousel(), ms)); }
     { const dv = document.getElementById('dt-det-vid'); const want = this.state.detVid || ''; if (dv && want && dv.getAttribute('src') !== want) { dv.controls = true; this._prepVideo(dv, true); dv.setAttribute('src', want); dv.play().catch(() => {}); } }
     if (ps && ps.openStop !== this.state.openStop && this.state.openStop !== null) {
       setTimeout(() => this._restoreSlots('gallery'), 30);
@@ -1514,6 +1517,10 @@ class Component extends DCLogic {
       new IntersectionObserver((es, io) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); markNear(); } }, { rootMargin: '1400px 0px' }).observe(jrnEl);
     } else markNear();
     // (2) pop-up carousel: warm the slides next to the visible one
+    document.addEventListener('load', e => {
+      const t = e.target;
+      if (t && t.tagName === 'IFRAME' && /^dt-det-yt/.test(t.id) && t.getAttribute('src')) [900, 1800, 3200].forEach(ms => setTimeout(() => this._syncModalFilms(), ms));
+    }, true);
     let carRaf = 0;
     document.addEventListener('scroll', e => {
       if (!e.target || e.target.id !== 'dt-carousel' || carRaf) return;
@@ -2256,12 +2263,13 @@ class Component extends DCLogic {
   }
   async _loadDetVid() {
     const i = this.state.openStop;
-    if (i === null) { if (this.state.detVid || this.state.detYt) this.setState({ detVid: null, detYt: null, detLocal: false }); return; }
+    if (i === null) { if (this.state.detVid || this.state.detYt || this.state.detYt2) this.setState({ detVid: null, detYt: null, detYt2: null, detLocal: false }); return; }
     /* stop-ийн дэлгэрэнгүй цонхны статик бичлэг (repo доторх /videos): 0-based stop индекс */
-    const STATIC_DET = { 1: 'yt:uAT8d1orQb4', 2: 'yt:BX6ZQVDYs9s', 3: 'yt:GHxF7QwXAzU', 4: 'yt:3QqjNLqDOCg', 5: 'yt:maX2DMex6aU', 6: 'yt:SlT6WwnGp6Y', 7: 'yt:YR5DQQoQgVg', 8: 'yt:-7-aaou3BAg' };
+    const STATIC_DET = { 1: 'yt:uAT8d1orQb4', 2: 'yt:BX6ZQVDYs9s', 3: 'yt:GHxF7QwXAzU', 4: 'yt:3QqjNLqDOCg', 5: 'yt:maX2DMex6aU', 6: 'yt:SlT6WwnGp6Y', 7: ['yt:fTCRVelShB8', 'yt:xmjgi-KuB5Q'], 8: 'yt:-7-aaou3BAg' };
     if (STATIC_DET[i]) {
-      const sv = STATIC_DET[i], yt = /^yt:/.test(sv) ? sv.slice(3) : null;
-      if (this.state.detVid !== (yt ? null : sv) || this.state.detYt !== yt || this.state.detLocal) this.setState({ detVid: yt ? null : sv, detYt: yt, detLocal: false });
+      const list = [].concat(STATIC_DET[i]), sv = list[0], yt = /^yt:/.test(sv) ? sv.slice(3) : null;
+      const yt2 = list[1] && /^yt:/.test(list[1]) ? list[1].slice(3) : null;
+      if (this.state.detVid !== (yt ? null : sv) || this.state.detYt !== yt || this.state.detYt2 !== yt2 || this.state.detLocal) this.setState({ detVid: yt ? null : sv, detYt: yt, detYt2: yt2, detLocal: false });
       [60, 250, 700].forEach(ms => setTimeout(() => { const c = document.getElementById('dt-carousel'); if (c && this.state.openStop === i && c.scrollLeft > 0 && !c.dataset.userMoved) { c.style.scrollBehavior = 'auto'; c.scrollLeft = 0; } }, ms));
       return;
     }
@@ -2274,7 +2282,7 @@ class Component extends DCLogic {
     } catch (e) {}
     if (!url) url = remote || null;
     if (this.state.openStop !== i) return;
-    if (this.state.detVid !== url || this.state.detLocal !== local || this.state.detYt) this.setState({ detVid: url, detYt: null, detLocal: local });
+    if (this.state.detVid !== url || this.state.detLocal !== local || this.state.detYt || this.state.detYt2) this.setState({ detVid: url, detYt: null, detYt2: null, detLocal: local });
   }
   _pickDetVid() {
     const i = this.state.openStop;
@@ -2388,17 +2396,31 @@ class Component extends DCLogic {
     const kids = c.children, cur = Math.round(c.scrollLeft / (c.clientWidth || 1));
     for (let k = Math.max(0, cur - 1); k <= cur + 2 && k < kids.length; k++) {
       if (kids[k] && kids[k].loadNow) kids[k].loadNow(k === cur ? 'high' : 'low');
+      // a second film slide starts loading when it is the current or the next slide
+      const lf = kids[k] && kids[k].querySelector ? kids[k].querySelector('iframe[data-src]') : null;
+      if (lf && !lf.getAttribute('src') && k <= cur + 1) lf.src = lf.dataset.src;
     }
+    if (this._modalCur !== cur) { this._modalCur = cur; this._syncModalFilms(); }
   }
   // Data Saver / 2G visitors keep the poster photos and skip the background films
   _saveData() {
     const c = navigator.connection;
     return !!(c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || '')));
   }
+  // only the film slide being looked at plays; the others pause
+  _syncModalFilms() {
+    const c = document.getElementById('dt-carousel');
+    if (!c) return;
+    const cur = Math.round(c.scrollLeft / (c.clientWidth || 1));
+    Array.prototype.forEach.call(c.children, (k, i) => {
+      const f = k.querySelector ? k.querySelector('iframe[id^="dt-det-yt"]') : null;
+      if (f && f.getAttribute('src')) this._ytCmd(f, i === cur ? 'playVideo' : 'pauseVideo');
+    });
+  }
   _ytCmd(f, func) {
     try {
       const w = f.contentWindow;
-      w.postMessage(JSON.stringify({ event: 'listening', id: f.closest('#dt-cta-yt') ? 'dt-cta' : 'dt-hero' }), '*');
+      w.postMessage(JSON.stringify({ event: 'listening', id: f.closest('#dt-cta-yt') ? 'dt-cta' : /^dt-det-yt/.test(f.id) ? f.id : 'dt-hero' }), '*');
       w.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
     } catch (_) {}
   }
@@ -2504,6 +2526,7 @@ class Component extends DCLogic {
       modalOpen: i !== null,
       hasDetVid: i !== null && !!this.state.detVid,
       hasDetYt: i !== null && !!this.state.detYt,
+      hasDetYt2: i !== null && !!this.state.detYt2,
       detVidSrc: this.state.detVid || '',
       hasLocalDetVid: i !== null && !!this.state.detLocal,
       pickDetVid: () => this._pickDetVid(),
