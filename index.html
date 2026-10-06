@@ -464,7 +464,7 @@ html[data-dt-edit] [data-tool]{display:inline-flex !important}
       </section>
       <section data-panel="8" data-screen-label="09 Other Gallery" style="position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden">
         <div id="dt-pan-img-8" style="position:absolute;inset:0;background-color:#cfc9b8;background-size:cover;background-position:center"></div>
-        <image-slot data-defer id="pan-bg-8" src="./media/panels/09.webp" data-panbg="8" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 09 background — drop a photo"></image-slot>
+        <image-slot data-defer id="pan-bg-8" src="./media/panels/09-food.jpg" data-panbg="8" shape="rect" fit="cover" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity .5s ease" placeholder="Stop 09 background — drop a photo"></image-slot>
         <video id="dt-pan-vid-8" autoplay="{{ yes }}" muted="{{ yes }}" loop="{{ yes }}" playsInline="{{ yes }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,9,.86) 0%,rgba(14,12,9,.62) 42%,rgba(14,12,9,.24) 72%,rgba(14,12,9,.4) 100%)"></div>
         <div data-pcopy="" style="position:absolute;left:clamp(24px,6%,90px);top:50%;transform:translateY(-50%);width:min(430px,42%);color:#ffffff">
@@ -2375,7 +2375,7 @@ class Component extends DCLogic {
   }
   // small thumbnail for the rail / map cards (the full panel photo is only needed behind the active panel)
   _thumb(src) {
-    const m = /\/media\/panels\/(\d\d)\.webp(?:[?#].*)?$/.exec(src || '');
+    const m = /\/media\/panels\/([\w-]+)\.(?:webp|jpg)(?:[?#].*)?$/.exec(src || '');
     return m ? './media/thumbs/p' + m[1] + '.jpg' : src;
   }
   _flushPanelBg() {
